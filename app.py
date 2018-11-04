@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot.storage import SQLStorageAdapter
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -12,13 +13,25 @@ def delfile(filename):
         os.remove(filename)
 
 delfile("./db.sqlite3")
-chatterbot = ChatBot("codey")
+
+
+chatterbot = ChatBot(
+    "codey",
+    filters=["chatterbot.filters.RepetitiveResponseFilter"]
+)
+#adaptor = chatterbot.storage.SQLStorageAdapter("brain")
 chatterbot.set_trainer(ChatterBotCorpusTrainer)
 
 def train():
+    print("starting to train")
+
     return chatterbot.train("./corpus")
 
 train()
+
+def clearEntry(storage):
+    for x in storage.filter():
+        storage.remove(x.text)
 
 @app.route("/")
 def home():
@@ -35,6 +48,7 @@ def get_bot_response():
 
 @app.route("/train-start")
 def get_train_bot():
+    clearEntry(chatterbot.storage)
     train()
     return redirect(url_for('home'))
 
