@@ -32,11 +32,11 @@ h3 {
 }
 
 #textInput {
-    width: 87%;
+    width: 99%;
     border: none;
     border: 3px solid #009688;
     font-family: monospace;
-    font-size: 17px;
+    font-size: 21px;
 }
 
 #buttonInput {
@@ -54,9 +54,9 @@ h3 {
 }
 
 .userText span {
-    background-color: #009688;
+    background-color: forestgreen;
     padding: 10px;
-    border-radius: 2px;
+    border-radius: 10px;
 }
 
 .botText {
@@ -68,9 +68,9 @@ h3 {
 }
 
 .botText span {
-    background-color: #EF5350;
+    background-color: #FF7351;
     padding: 10px;
-    border-radius: 2px;
+    border-radius: 10px;
 }
 
 #tidbit {

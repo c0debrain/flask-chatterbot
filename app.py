@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 from flask import Flask, render_template, request, redirect, url_for
 from chatterbot import ChatBot
@@ -6,24 +7,15 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-chatterbot = ChatBot("codey")
-#chatterbot = ChatBot("codey", storage_adapter="chatterbot.storage.SQLStorageAdapter")
-#chatterbot.set_trainer(ChatterBotCorpusTrainer)
-#english_bot.train("chatterbot.corpus.english")
-#english_bot.train("chatterbot.corpus.english")
-
-# chatterbot.train(
-#     "chatterbot.corpus.english.greetings",
-#     "chatterbot.corpus.english.conversations"
-# )
-
-def delfile():
-    if os.path.exists("./db.sqlite3"):
+def delfile(filename):
+    if os.path.exists(filename):
         os.remove(filename)
 
+delfile("./db.sqlite3")
+chatterbot = ChatBot("codey")
+chatterbot.set_trainer(ChatterBotCorpusTrainer)
+
 def train():
-    chatterbot = ChatBot("codey", storage_adapter="chatterbot.storage.SQLStorageAdapter")
-    chatterbot.set_trainer(ChatterBotCorpusTrainer)
     return chatterbot.train("./corpus")
 
 train()
