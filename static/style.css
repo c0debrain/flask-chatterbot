@@ -34,7 +34,7 @@ h3 {
 #textInput {
     width: 87%;
     border: none;
-    border-bottom: 3px solid #009688;
+    border: 3px solid #009688;
     font-family: monospace;
     font-size: 17px;
 }
