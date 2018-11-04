@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
@@ -16,6 +17,10 @@ chatterbot = ChatBot("codey")
 #     "chatterbot.corpus.english.conversations"
 # )
 
+def delfile():
+    if os.path.exists("./db.sqlite3"):
+        os.remove(filename)
+
 def train():
     chatterbot = ChatBot("codey", storage_adapter="chatterbot.storage.SQLStorageAdapter")
     chatterbot.set_trainer(ChatterBotCorpusTrainer)
@@ -24,7 +29,6 @@ def train():
 train()
 
 @app.route("/")
-@app.route("/index")
 def home():
     return render_template("index.html")
 
@@ -40,8 +44,7 @@ def get_bot_response():
 @app.route("/train-start")
 def get_train_bot():
     train()
-    return redirect(url_for('index'))
-    #return str("<h1>Trained! go <a href='/'>here</a> to talk to me.</h1>")
+    return redirect(url_for('home'))
 
 if __name__ == "__main__":
     app.run()
