@@ -6,13 +6,30 @@
   </head>
   <body>
     <h1>Codey the bot.</h1>
-    <h2>You can train me by following these steps.<h2>
+    <h2>You can train me by following these steps.</h2>
     <hr/>
     <ol>
-     <li>Download this sample training file.</li>
-     <li>Modify the file to add your question and possbile answers.</li>
-     <li>Upload the file back here.</li>
-     <li><a href="/train-start">Click train.</a></li>
+     <li>Download this <a href="/service.yml">sample training file.</a></li>
+     <li>Modify the file to add your question and possbile answers.
+       <ol>
+        <li>NOTE: make sure to follow the exact format</li>
+        <li>HINT: You can copy paste the - - and - line and modify the text.</li>
+      </ol>
+     </li>
+     <li>Choose the file and click submit.
+
+       <form action = "/uploader" method = "POST"
+         enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <input type = "submit"/>
+      </form>
+      <ol>
+        <li>Upload the file.</li>
+         <li>Start trining. (this takes some time)</li>
+      </ol>
+     </li>
+     <li><a href="/train-start">Click train.</a> (optional)</li>
+     <sub>If you want to retrain without uploading.</sub>
     </ol>
 
 
